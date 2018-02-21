@@ -9,24 +9,36 @@ public class CoffeeMachine {
     }
 
     public void makeCoffee() {
-        drinkManager.execute(new Coffee(), this.sugar);
+        makeDrink(new Coffee());
     }
 
     public void makeTea() {
-        drinkManager.execute(new Tea(), this.sugar);
+        makeDrink(new Tea());
     }
 
     public void makeChocolate() {
-        drinkManager.execute(new Chocolate(), this.sugar);
+        makeDrink(new Chocolate());
+    }
+
+    private void makeDrink(IDrink drink) {
+        drinkManager.execute(drink, this.sugar);
     }
 
     public void selectSugar(int sugar) {
-        if (sugar > 2){
+        if (isSugarAboveMaximum(sugar)){
             this.sugar = 2;
-        } else if (sugar < 0){
+        } else if (isSugarBelowMinimum(sugar)){
             this.sugar = 0;
         } else {
             this.sugar = sugar;
         }
+    }
+
+    private boolean isSugarBelowMinimum(int sugar) {
+        return sugar < 0;
+    }
+
+    private boolean isSugarAboveMaximum(int sugar) {
+        return sugar > 2;
     }
 }
