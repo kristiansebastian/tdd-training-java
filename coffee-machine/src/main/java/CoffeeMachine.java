@@ -9,4 +9,8 @@ public class CoffeeMachine {
     public void makeCoffee() {
         drinkManager.execute("C::");
     }
+
+    public void makeTea() {
+        drinkManager.execute("T::");
+    }
 }
