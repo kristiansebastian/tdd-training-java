@@ -6,13 +6,13 @@ import static org.mockito.Mockito.verify;
 
 public class CoffeeMachineTest {
 
-    DrinkManager drinkManager;
-    CoffeeMachine coffeeMachine;
+    private DrinkMaker drinkMaker;
+    private CoffeeMachine coffeeMachine;
 
     @Before
     public void setup(){
-        drinkManager = mock(DrinkManager.class);
-        coffeeMachine = new CoffeeMachine(drinkManager);
+        drinkMaker = mock(DrinkMaker.class);
+        coffeeMachine = new CoffeeMachine(new DrinkManager(drinkMaker));
     }
 
     @Test
@@ -20,7 +20,7 @@ public class CoffeeMachineTest {
 
         coffeeMachine.makeCoffee();
 
-        verify(drinkManager).execute("C::");
+        verify(drinkMaker).execute("C::");
     }
 
     @Test
@@ -28,7 +28,7 @@ public class CoffeeMachineTest {
 
         coffeeMachine.makeTea();
 
-        verify(drinkManager).execute("T::");
+        verify(drinkMaker).execute("T::");
     }
 
     @Test
@@ -36,7 +36,7 @@ public class CoffeeMachineTest {
 
         coffeeMachine.makeChocolate();
 
-        verify(drinkManager).execute("H::");
+        verify(drinkMaker).execute("H::");
     }
 
 
