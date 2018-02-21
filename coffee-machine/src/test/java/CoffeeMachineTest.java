@@ -1,3 +1,4 @@
+import org.junit.Before;
 import org.junit.Test;
 
 import static org.mockito.Mockito.mock;
@@ -5,10 +6,17 @@ import static org.mockito.Mockito.verify;
 
 public class CoffeeMachineTest {
 
+    DrinkManager drinkManager;
+    CoffeeMachine coffeeMachine;
+
+    @Before
+    public void setup(){
+        drinkManager = mock(DrinkManager.class);
+        coffeeMachine = new CoffeeMachine(drinkManager);
+    }
+
     @Test
     public void makeCoffeeWithoutSugar(){
-        DrinkManager drinkManager = mock(DrinkManager.class);
-        CoffeeMachine coffeeMachine = new CoffeeMachine(drinkManager);
 
         coffeeMachine.makeCoffee();
 
@@ -17,8 +25,6 @@ public class CoffeeMachineTest {
 
     @Test
     public void makeTeaWithoutSugar() {
-        DrinkManager drinkManager = mock(DrinkManager.class);
-        CoffeeMachine coffeeMachine = new CoffeeMachine(drinkManager);
 
         coffeeMachine.makeTea();
 
@@ -27,8 +33,6 @@ public class CoffeeMachineTest {
 
     @Test
     public void makeChocolateWithoutSugar() {
-        DrinkManager drinkManager = mock(DrinkManager.class);
-        CoffeeMachine coffeeMachine = new CoffeeMachine(drinkManager);
 
         coffeeMachine.makeChocolate();
 
