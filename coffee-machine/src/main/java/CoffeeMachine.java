@@ -13,4 +13,8 @@ public class CoffeeMachine {
     public void makeTea() {
         drinkManager.execute("T::");
     }
+
+    public void makeChocolate() {
+        drinkManager.execute("H::");
+    }
 }

@@ -25,5 +25,15 @@ public class CoffeeMachineTest {
         verify(drinkManager).execute("T::");
     }
 
+    @Test
+    public void makeChocolateWithoutSugar() {
+        DrinkManager drinkManager = mock(DrinkManager.class);
+        CoffeeMachine coffeeMachine = new CoffeeMachine(drinkManager);
+
+        coffeeMachine.makeChocolate();
+
+        verify(drinkManager).execute("H::");
+    }
+
 
 }
