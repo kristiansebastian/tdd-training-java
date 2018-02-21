@@ -7,14 +7,14 @@ public class CoffeeMachine {
     }
 
     public void makeCoffee() {
-        drinkManager.execute("C::");
+        drinkManager.execute(new Coffee());
     }
 
     public void makeTea() {
-        drinkManager.execute("T::");
+        drinkManager.execute(new Tea());
     }
 
     public void makeChocolate() {
-        drinkManager.execute("H::");
+        drinkManager.execute(new Chocolate());
     }
 }

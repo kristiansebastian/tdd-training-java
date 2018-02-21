@@ -1,3 +1,5 @@
+import com.sun.xml.internal.bind.v2.model.core.ID;
+
 public class DrinkManager {
 
     private DrinkMaker drinkMaker;
@@ -6,7 +8,7 @@ public class DrinkManager {
         this.drinkMaker = drinkMaker;
     }
 
-    public void execute(String command){
-        drinkMaker.execute(command);
+    public void execute(IDrink drink){
+        drinkMaker.execute(String.format("%s::", drink.getDrinkMakerCode()));
     }
 }
