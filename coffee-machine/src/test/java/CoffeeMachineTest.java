@@ -1,18 +1,21 @@
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.*;
 
 public class CoffeeMachineTest {
 
     private DrinkMaker drinkMaker;
+    private Wallet wallet;
     private CoffeeMachine coffeeMachine;
 
     @Before
-    public void setup(){
+    public void setupCoffeeMachineWithOneEuro(){
         drinkMaker = mock(DrinkMaker.class);
-        coffeeMachine = new CoffeeMachine(new DrinkManager(drinkMaker));
+        wallet = mock(Wallet.class);
+        coffeeMachine = new CoffeeMachine(new DrinkManager(drinkMaker), wallet);
+
+        when(wallet.getMoney()).thenReturn(1.0f);
     }
 
     @Test
@@ -76,6 +79,17 @@ public class CoffeeMachineTest {
         coffeeMachine.makeChocolate();
 
         verify(drinkMaker).execute("H::");
+    }
+
+    @Test
+    public void doNotMakeDrinkIfNotEnoughMoney() {
+
+        when(wallet.getMoney()).thenReturn(0.0f);
+
+        coffeeMachine.selectSugar(0);
+        coffeeMachine.makeTea();
+
+        verify(drinkMaker, never()).execute("T::");
     }
 
 }

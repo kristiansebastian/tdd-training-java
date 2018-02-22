@@ -2,10 +2,13 @@ public class CoffeeMachine {
 
     private DrinkManager drinkManager;
 
+    private Wallet wallet;
+
     private int sugar = 1;
 
-    public CoffeeMachine(DrinkManager drinkManager) {
+    public CoffeeMachine(DrinkManager drinkManager, Wallet wallet) {
         this.drinkManager = drinkManager;
+        this.wallet = wallet;
     }
 
     public void makeCoffee() {
@@ -21,7 +24,13 @@ public class CoffeeMachine {
     }
 
     private void makeDrink(IDrink drink) {
-        drinkManager.execute(drink, this.sugar);
+        if (hasEnoughMoneyToMakeTheDrink(drink)) {
+            this.drinkManager.execute(drink, this.sugar);
+        }
+    }
+
+    private boolean hasEnoughMoneyToMakeTheDrink(IDrink drink) {
+        return this.wallet.getMoney() >= drink.getPrice();
     }
 
     public void selectSugar(int sugar) {

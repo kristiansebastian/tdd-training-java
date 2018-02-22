@@ -3,4 +3,9 @@ public class Chocolate implements IDrink {
     public String getDrinkMakerCode() {
         return "H";
     }
+
+    @Override
+    public Float getPrice() {
+        return 0.5f;
+    }
 }
