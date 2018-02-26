@@ -1,3 +1,8 @@
+import drink.Chocolate;
+import drink.Coffee;
+import drink.IDrink;
+import drink.Tea;
+
 public class CoffeeMachine {
 
     private DrinkManager drinkManager;
@@ -23,16 +28,6 @@ public class CoffeeMachine {
         makeDrink(new Chocolate());
     }
 
-    private void makeDrink(IDrink drink) {
-        if (hasEnoughMoneyToMakeTheDrink(drink)) {
-            this.drinkManager.execute(drink, this.sugar);
-        }
-    }
-
-    private boolean hasEnoughMoneyToMakeTheDrink(IDrink drink) {
-        return this.wallet.getMoney() >= drink.getPrice();
-    }
-
     public void selectSugar(int sugar) {
         if (isSugarAboveMaximum(sugar)){
             this.sugar = 2;
@@ -41,6 +36,22 @@ public class CoffeeMachine {
         } else {
             this.sugar = sugar;
         }
+    }
+
+    private void makeDrink(IDrink drink) {
+        if (hasEnoughMoneyToMakeTheDrink(drink)) {
+            this.drinkManager.execute(drink, this.sugar);
+        } else {
+            this.drinkManager.executeNoDrink(drink, this.getMoneyLeft(drink));
+        }
+    }
+
+    private float getMoneyLeft(IDrink drink) {
+        return drink.getPrice() - this.wallet.getMoney();
+    }
+
+    private boolean hasEnoughMoneyToMakeTheDrink(IDrink drink) {
+        return this.wallet.getMoney() >= drink.getPrice();
     }
 
     private boolean isSugarBelowMinimum(int sugar) {

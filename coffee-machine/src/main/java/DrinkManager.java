@@ -1,4 +1,5 @@
-import com.sun.xml.internal.bind.v2.model.core.ID;
+import drink.IDrink;
+import drink.NoDrink;
 
 public class DrinkManager {
 
@@ -11,6 +12,11 @@ public class DrinkManager {
     public void execute(IDrink drink, int sugar){
         String sugarString = sugar > 0 ? Integer.toString(sugar) : "";
         String stick = sugar > 0 ? "0" : "";
-        drinkMaker.execute(String.format("%s:%s:%s", drink.getDrinkMakerCode(), sugarString, stick));
+        this.drinkMaker.execute(String.format("%s:%s:%s", drink.getDrinkMakerCode(), sugarString, stick));
+    }
+
+    public void executeNoDrink(IDrink drink, float moneyLeft) {
+        this.drinkMaker.execute(
+                String.format("%s:There isn't enough money, left %f", drink.getDrinkMakerCode(), moneyLeft));
     }
 }

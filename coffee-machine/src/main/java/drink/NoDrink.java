@@ -1,11 +1,15 @@
-public class Chocolate implements IDrink {
+package drink;
+
+public class NoDrink implements IDrink {
+
     @Override
     public String getDrinkMakerCode() {
-        return "H";
+        return "M";
     }
 
     @Override
     public Float getPrice() {
-        return 0.5f;
+        return -1.0f;
     }
+
 }
