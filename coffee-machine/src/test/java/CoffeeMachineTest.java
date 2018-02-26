@@ -115,4 +115,14 @@ public class CoffeeMachineTest {
         verify(drinkMaker, never()).execute("C::");
     }
 
+    @Test
+    public void makeHotCoffee(){
+
+        coffeeMachine.selectSugar(1);
+        coffeeMachine.setExtraHot(true);
+        coffeeMachine.makeCoffee();
+
+        verify(drinkMaker).execute("Ch:1:0");
+    }
+
 }

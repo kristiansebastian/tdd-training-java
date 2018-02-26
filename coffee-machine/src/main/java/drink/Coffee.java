@@ -1,6 +1,6 @@
 package drink;
 
-public class Coffee implements IDrink {
+public class Coffee implements IHotDrink {
     @Override
     public String getDrinkMakerCode() {
         return "C";

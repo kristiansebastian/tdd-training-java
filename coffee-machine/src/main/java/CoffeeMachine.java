@@ -8,6 +8,8 @@ public class CoffeeMachine {
 
     private int sugar = 1;
 
+    private boolean extraHot = false;
+
     public CoffeeMachine(DrinkManager drinkManager, Wallet wallet) {
         this.drinkManager = drinkManager;
         this.wallet = wallet;
@@ -39,13 +41,23 @@ public class CoffeeMachine {
         }
     }
 
+    public void setExtraHot(boolean extraHot) {
+        this.extraHot = extraHot;
+    }
+
     private void makeDrink(IDrink drink) {
-        if (hasEnoughMoneyToMakeTheDrink(drink)) {
-            this.drinkManager.execute(drink, this.sugar);
-        } else {
+        if (!hasEnoughMoneyToMakeTheDrink(drink)) {
             this.drinkManager.executeNoDrink(new NoDrink(), this.getMoneyLeft(drink));
+        } else if (hasToMakeDrinkExtraHot(drink)){
+            this.drinkManager.executeHotDrink(drink, this.sugar);
+        } else {
+            this.drinkManager.execute(drink, this.sugar);
         }
         this.wallet.reset();
+    }
+
+    private boolean hasToMakeDrinkExtraHot(IDrink drink) {
+        return this.extraHot && drink instanceof IHotDrink;
     }
 
     private float getMoneyLeft(IDrink drink) {
