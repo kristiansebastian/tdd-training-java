@@ -125,4 +125,14 @@ public class CoffeeMachineTest {
         verify(drinkMaker).execute("Ch:1:0");
     }
 
+    @Test
+    public void makeColdOrangeEvenSettingExtraHot(){
+
+        coffeeMachine.selectSugar(1);
+        coffeeMachine.setExtraHot(true);
+        coffeeMachine.makeOrange();
+
+        verify(drinkMaker).execute("O:1:0");
+    }
+
 }
