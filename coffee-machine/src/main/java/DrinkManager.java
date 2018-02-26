@@ -9,19 +9,25 @@ public class DrinkManager {
     }
 
     public void execute(IDrink drink, int sugar){
-        String sugarString = sugar > 0 ? Integer.toString(sugar) : "";
-        String stick = sugar > 0 ? "0" : "";
-        this.drinkMaker.execute(String.format("%s:%s:%s", drink.getDrinkMakerCode(), sugarString, stick));
+        this.drinkMaker.execute(
+                String.format("%s:%s:%s", drink.getDrinkMakerCode(), getSugarCode(sugar), getStickCode(sugar)));
     }
 
     public void executeHotDrink(IDrink drink, int sugar) {
-        String sugarString = sugar > 0 ? Integer.toString(sugar) : "";
-        String stick = sugar > 0 ? "0" : "";
-        this.drinkMaker.execute(String.format("%s:%s:%s", drink.getExtraHotDrinkMakerCode(), sugarString, stick));
+        this.drinkMaker.execute(
+                String.format("%s:%s:%s", drink.getExtraHotDrinkMakerCode(), getSugarCode(sugar), getStickCode(sugar)));
     }
 
     public void executeNoDrink(IDrink drink, float moneyLeft) {
         this.drinkMaker.execute(
                 String.format("%s:There isn't enough money, left %f", drink.getDrinkMakerCode(), moneyLeft));
+    }
+
+    private String getStickCode(int sugar) {
+        return sugar > 0 ? "0" : "";
+    }
+
+    private String getSugarCode(int sugar) {
+        return sugar > 0 ? Integer.toString(sugar) : "";
     }
 }
