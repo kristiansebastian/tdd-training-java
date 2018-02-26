@@ -12,10 +12,9 @@ public class CoffeeMachineTest {
     @Before
     public void setupCoffeeMachineWithOneEuro(){
         drinkMaker = mock(DrinkMaker.class);
-        wallet = mock(Wallet.class);
+        wallet = new Wallet();
+        wallet.addMoney(1.0f);
         coffeeMachine = new CoffeeMachine(new DrinkManager(drinkMaker), wallet);
-
-        when(wallet.getMoney()).thenReturn(1.0f);
     }
 
     @Test
@@ -84,7 +83,7 @@ public class CoffeeMachineTest {
     @Test
     public void doNotMakeDrinkIfNotEnoughMoney() {
 
-        when(wallet.getMoney()).thenReturn(0.0f);
+        wallet.reset();
 
         coffeeMachine.selectSugar(0);
         coffeeMachine.makeTea();
@@ -92,6 +91,19 @@ public class CoffeeMachineTest {
         verify(drinkMaker, never()).execute("T::");
 
         verify(drinkMaker).execute("T:There isn't enough money, left 0,400000");
+    }
+
+    @Test
+    public void afterTheFirstDrinkNotServeTheSecondIfMoneyHasNotBeenAdded(){
+
+        coffeeMachine.makeCoffee();
+
+        verify(drinkMaker).execute("C:1:0");
+
+        coffeeMachine.selectSugar(0);
+        coffeeMachine.makeCoffee();
+
+        verify(drinkMaker, never()).execute("C::");
     }
 
 }

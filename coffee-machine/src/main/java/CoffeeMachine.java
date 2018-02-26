@@ -44,6 +44,7 @@ public class CoffeeMachine {
         } else {
             this.drinkManager.executeNoDrink(drink, this.getMoneyLeft(drink));
         }
+        this.wallet.reset();
     }
 
     private float getMoneyLeft(IDrink drink) {

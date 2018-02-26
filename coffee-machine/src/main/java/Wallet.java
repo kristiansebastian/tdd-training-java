@@ -10,7 +10,7 @@ public class Wallet {
         this.money += money;
     }
 
-    public void reset(float money) {
-        this.money = money;
+    public void reset() {
+        this.money = 0.0f;
     }
 }
