@@ -45,6 +45,15 @@ public class CoffeeMachineTest {
     }
 
     @Test
+    public void makeOrangeWithoutSugar() {
+
+        coffeeMachine.selectSugar(0);
+        coffeeMachine.makeOrange();
+
+        verify(drinkMaker).execute("O::");
+    }
+
+    @Test
     public void makeChocolateWithOneSugar() {
 
         coffeeMachine.selectSugar(1);

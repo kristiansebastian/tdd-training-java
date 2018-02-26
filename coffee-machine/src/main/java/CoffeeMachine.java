@@ -25,6 +25,10 @@ public class CoffeeMachine {
         makeDrink(new Chocolate());
     }
 
+    public void makeOrange() {
+        makeDrink(new Orange());
+    }
+
     public void selectSugar(int sugar) {
         if (isSugarAboveMaximum(sugar)){
             this.sugar = 2;
