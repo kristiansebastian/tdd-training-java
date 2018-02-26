@@ -90,7 +90,7 @@ public class CoffeeMachineTest {
 
         verify(drinkMaker, never()).execute("T::");
 
-        verify(drinkMaker).execute("T:There isn't enough money, left 0,400000");
+        verify(drinkMaker).execute("M:There isn't enough money, left 0,400000");
     }
 
     @Test

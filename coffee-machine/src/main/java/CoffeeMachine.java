@@ -1,7 +1,4 @@
-import drink.Chocolate;
-import drink.Coffee;
-import drink.IDrink;
-import drink.Tea;
+import drink.*;
 
 public class CoffeeMachine {
 
@@ -42,7 +39,7 @@ public class CoffeeMachine {
         if (hasEnoughMoneyToMakeTheDrink(drink)) {
             this.drinkManager.execute(drink, this.sugar);
         } else {
-            this.drinkManager.executeNoDrink(drink, this.getMoneyLeft(drink));
+            this.drinkManager.executeNoDrink(new NoDrink(), this.getMoneyLeft(drink));
         }
         this.wallet.reset();
     }

@@ -1,5 +1,4 @@
 import drink.IDrink;
-import drink.NoDrink;
 
 public class DrinkManager {
 
