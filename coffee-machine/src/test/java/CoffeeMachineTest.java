@@ -1,5 +1,9 @@
+import drink.Coffee;
 import org.junit.Before;
 import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.Map;
 
 import static org.mockito.Mockito.*;
 
@@ -7,14 +11,16 @@ public class CoffeeMachineTest {
 
     private DrinkMaker drinkMaker;
     private Wallet wallet;
+    private Printer printer;
     private CoffeeMachine coffeeMachine;
 
     @Before
     public void setupCoffeeMachineWithOneEuro(){
         drinkMaker = mock(DrinkMaker.class);
+        printer = mock(Printer.class);
         wallet = new Wallet();
         wallet.addMoney(1.0f);
-        coffeeMachine = new CoffeeMachine(new DrinkManager(drinkMaker), wallet);
+        coffeeMachine = new CoffeeMachine(new DrinkManager(drinkMaker), wallet, printer);
     }
 
     @Test
@@ -133,6 +139,31 @@ public class CoffeeMachineTest {
         coffeeMachine.makeOrange();
 
         verify(drinkMaker).execute("O:1:0");
+    }
+
+    @Test
+    public void printReport(){
+
+        coffeeMachine.printReport();
+
+        Map<String, Integer> drinksSold = new HashMap<>();
+        verify(printer).printReport(drinksSold, 0.0f);
+
+        coffeeMachine.makeCoffee();
+        coffeeMachine.printReport();
+
+        Coffee coffee = new Coffee();
+        drinksSold.put(coffee.getDrinkMakerCode(), 1);
+        verify(printer).printReport(drinksSold, coffee.getPrice());
+
+        wallet.addMoney(1.0f);
+        coffeeMachine.makeCoffee();
+        coffeeMachine.printReport();
+
+        drinksSold.put(coffee.getDrinkMakerCode(), 2);
+        verify(printer).printReport(drinksSold, coffee.getPrice() * 2);
+
+
     }
 
 }
