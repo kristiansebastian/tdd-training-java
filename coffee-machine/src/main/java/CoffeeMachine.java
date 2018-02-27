@@ -64,7 +64,7 @@ public class CoffeeMachine {
             this.drinkManager.executeNoDrink(new NoDrink(), this.getMoneyLeft(drink));
             return;
         } else if (hasToMakeDrinkExtraHot(drink)){
-            this.drinkManager.executeHotDrink(drink, this.sugar);
+            this.drinkManager.executeHotDrink((IHotDrink) drink, this.sugar);
         } else {
             this.drinkManager.execute(drink, this.sugar);
         }

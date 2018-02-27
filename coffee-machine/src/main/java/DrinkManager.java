@@ -1,4 +1,5 @@
 import drink.IDrink;
+import drink.IHotDrink;
 
 public class DrinkManager {
 
@@ -13,7 +14,7 @@ public class DrinkManager {
                 String.format("%s:%s:%s", drink.getDrinkMakerCode(), getSugarCode(sugar), getStickCode(sugar)));
     }
 
-    public void executeHotDrink(IDrink drink, int sugar) {
+    public void executeHotDrink(IHotDrink drink, int sugar) {
         this.drinkMaker.execute(
                 String.format("%s:%s:%s", drink.getExtraHotDrinkMakerCode(), getSugarCode(sugar), getStickCode(sugar)));
     }
