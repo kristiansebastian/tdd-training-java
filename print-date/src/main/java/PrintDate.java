@@ -9,6 +9,6 @@ public class PrintDate {
 	}
 
 	public void printCurrentDate() {
-		this.printer.printCurrentDate(this.dateProvider.getCurrentDate());
-}
+		this.printer.printDate(this.dateProvider.getCurrentDate());
+	}
 }
